@@ -13,7 +13,7 @@ def max_sized_file(path):
                 max_file=file
     return max_file if len(max_file)>0 else "No files in path"
 
-
+#function to return all files in given directory with provided extension
 def list_files_by_given_type(path,ext):
     files=[]
     for item in os.listdir(path):
