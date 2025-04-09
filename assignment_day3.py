@@ -1,11 +1,12 @@
 lst = [1,2,3, [1,2,3,[3,4,[4,3]],2]]
 lst1 = [[[ '(0,1,2)' , '(3,4,5)'], ['(5,6,7)' , '(9,4,2)']]]
 
-def flatten(lst,flatten_list=[]):
+def flatten(lst):
+    flatten_list=[]
     i=0
     for i in lst:
         if type(i) is list:
-            flatten(i,flatten_list)#recursion
+            flatten_list+= flatten(i)#recursion
         else:
             flatten_list.append(i)
     return flatten_list
