@@ -1,30 +1,32 @@
 import os
 
-path=r"C:\Users\Sai Charan\Desktop\Python\\"
+path=r"C:\Users\Sai Charan\Desktop\Python"
 
-#function to return file of maximum size
-def max_sized_file(path):
-    max_file=""
-    max_file_size=0
-    if os.path.isdir(path):
-        for file in os.listdir(path):
-            if os.path.isfile(path+file) and os.path.getsize(path+file)>max_file_size:
-                max_file_size=os.path.getsize(path+file)
-                max_file=file
-    return max_file if len(max_file)>0 else "No files in path"
+#question 3 function to return file of maximum size
+def max_sized_file(path,max_file={}):
+    for file in os.listdir(path):
+        file=path+"\\"+file
+        if os.path.isfile(file):
+            max_file[file]=os.path.getsize(file)
+        elif os.path.isdir(file):
+            max_sized_file(file,max_file)
+                
+    return sorted(max_file,key=lambda file:max_file[file])[-1]
 
-#function to return all files in given directory with provided extension
+#question 4 function to return all files in given directory with provided extension
 def list_files_by_given_type(path,ext):
-    files=[]
-    for item in os.listdir(path):
-        if os.path.isdir(path+item):
-            files+=list_files_by_given_type(path+item,ext)
-        elif ext in item:
-            files.append(item)
-    return files
+    with open("files_list.txt","wt") as f:
+        for item in os.listdir(path):
+            item=path+"\\"+item
+            if os.path.isdir(item):
+                list_files_by_given_type(item,ext)
+            elif ext in item:
+                f.writelines(item+"\n")
             
 
-print(list_files_by_given_type(path,".py"))
+
+
+list_files_by_given_type(path,".py")
 
 
 #print(max_sized_file(path))
