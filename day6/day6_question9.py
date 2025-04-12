@@ -12,7 +12,6 @@ async def download(url):
             
 
 async def get_urls(url):
-    print(url)
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     return soup.find_all("a",href=True)
@@ -20,8 +19,8 @@ async def get_urls(url):
 async def download_all_urls(url):
     urls=[i.get("href") for i in await get_urls(url) if "http" in i.get("href") ]
     tasks= [asyncio.create_task(download(url)) for url in urls]
-    return [await task for task in tasks]
-    
+    res= [await task for task in tasks]
+    return len(''.join(res))
     
     
     
@@ -29,6 +28,7 @@ if __name__=='__main__':
     url="http://notepadfromdas.pythonanywhere.com/pad/share"
     st=time.time()
     res = asyncio.run(download_all_urls(url)) 
-    print("Time taken :",time.time()-st,"sec")
-    print(len(''.join(res)))
+    print("sucessfully downloaded using async","Time taken :",time.time()-st,"sec to download",res)
     
+    
+#sucessfully downloaded using async Time taken : 1.5780158042907715 sec to download 211729
