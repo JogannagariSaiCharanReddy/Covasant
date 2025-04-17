@@ -8,6 +8,12 @@ app = Flask(__name__)
 def index():
     return share()
     
+    
+@app.route("/favicon.ico")  #http://localhost:5000/favicon.ico
+def favicon():
+    return app.send_static_file("favicon.ico")
+    
+    
 @app.route("/updatefortoday", methods=['GET','POST'])    
 def notepad():
     if request.method == 'POST':
