@@ -18,11 +18,3 @@ class Poly():
         return f"Poly({', '.join(map(str,self.coeff))})"
             
 
-if __name__ == '__main__':
-    a = Poly(1,2,3)  
-    b = Poly(1,0,1,1,2,3)
-    c=Poly(1,1,1,1,1,1,1)
-    d = a+b+c 
-    c=a+b
-    print(c) 
-    print(d)

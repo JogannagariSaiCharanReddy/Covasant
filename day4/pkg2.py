@@ -34,10 +34,4 @@ class File():
         
 
         
-        
-        
-
-fs = File(r"C:\Users\Sai Charan\Desktop\Python\assignments")
-print(fs.getMaxSizeFile(2)) # gives two max file names 
-print(fs.getLatestFiles(date(2025,4,9)))
-#Returns list of files after 1st Feb 2018 
+   
