@@ -19,7 +19,7 @@ def notepad():
     if request.method == 'POST':
         content = request.form.get("content", "ALL")
         with open("notepad.txt","a") as f:
-            f.writelines(content+"\n")
+            f.writelines(content)
         
         with open("notepad.txt","rt") as f:
             notepad=f.readlines()
@@ -49,23 +49,53 @@ def notepad():
         
     else:
         return """
-    <html><head>
+  <!DOCTYPE html>
+<html>
+<head>
     <title>Give Env</title>
-    </head>
-    <body>
-        <form action="/updatefortoday" method="post">
-        Enter text:
-        <br/>
-        <textarea name="content" cols="40" rows="5"></textarea>
-        <br/>
-        <input type="submit" value="update" />
-        </form>
-        <br/>
-        <a href="/share">share<a/>
-        <br/>
-        <a href="/clearnotepad">clear notepad<a/>
-    </body>
-    </html> 
+    <style>
+        body {
+            padding: 40px;
+            text-align: center;
+           }
+
+        textarea {
+            width: 80%;
+            height: 300px;
+            font-size: 16px;
+            padding: 10px;
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #3366cc;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="/updatefortoday" method="post">
+        <textarea id="content" name="content" placeholder="Write something..."></textarea><br/>
+        <input type="submit" value="Update" />
+    </form>
+
+    <a href="/share">Share</a>
+    <a href="/clearnotepad">Clear Notepad</a>
+
+</body>
+</html>
+
+
         """
         
 @app.route("/clearnotepad", methods=['GET'])        
