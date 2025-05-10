@@ -7,9 +7,8 @@ from langchain_core.runnables import *
 from langchain_core.messages import SystemMessage,HumanMessage
 import os
 from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import ConversationBufferMemory   
 
-# # Set your MistralAI API key
 os.environ["MISTRAL_API_KEY"] = "OxMn5wJ7YkowO5ly93DvO6HFii0rqezf"
 
 model = ChatMistralAI(
@@ -18,12 +17,11 @@ model = ChatMistralAI(
     max_retries=2,
 )
 
-# Memory to keep conversation history
 memory = ConversationBufferMemory()
 
 conversation = ConversationChain(
     llm=model,
-    # memory=memory,
+    memory=memory,
     verbose=True
 )
 

@@ -10,7 +10,23 @@ def chat():
     if request.method == "POST":
         query = request.form["query"]
         result = conversation.predict(input=query)
-        history = conversation.memory.buffer.split("\n")
+        
+        history = []
+        for msg in conversation.memory.chat_memory.messages:
+            current_conv={}
+            if msg.type == "human":
+                current_conv["User"]= msg.content
+            elif msg.type == "ai":
+                lines = msg.content.strip().split('\n')
+                for line in lines:
+                    if "AI" not in current_conv:
+                        current_conv["AI"]=[line.strip()]
+                    else:
+                        current_conv["AI"].append(line.strip())
+            history.append(current_conv)
+
+        print(history)
+
     return render_template("index.html", result=result, history=history)
 
 if __name__ == "__main__":
