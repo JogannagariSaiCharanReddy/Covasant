@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LangChain Chatbot</title>
+</head>
+<body>
+    <h1>LangChain Chatbot with MistralAI</h1>
+    <form method="post">
+        <label>Query:</label><br>
+        <input type="text" name="query" required><br><br>
+        <input type="submit" value="Send">
+    </form>
+    <h3>Result:</h3>
+    <p>{{ result }}</p>
+
+    <h3>History:</h3>
+    <ul>
+        {% for line in history %}
+        <li>{{ line }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
