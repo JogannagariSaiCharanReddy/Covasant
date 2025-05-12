@@ -21,8 +21,7 @@ memory = ConversationBufferMemory()
 
 conversation = ConversationChain(
     llm=model,
-    memory=memory,
-    verbose=True
+    memory=memory
 )
 
 
